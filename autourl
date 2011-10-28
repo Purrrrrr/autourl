@@ -1,0 +1,13 @@
+#!/bin/bash
+URL=$1
+
+if expr $URL : '^http://imgur.com' > /dev/null ; then
+  `dirname $0`/loadimgur $URL
+  exit
+fi
+if expr $URL : '.*\(.png\|.jpg\|.gif\)$' > /dev/null ; then
+  `dirname $0`/loadimage $URL
+  exit
+fi
+
+firefox $URL

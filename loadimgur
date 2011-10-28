@@ -1,0 +1,6 @@
+#!/bin/bash
+
+URL=$1
+echo "Downloading imgur data";
+IMGURL=`wget -q -O - $URL | grep 'rel="image_src"' | egrep -o "http://[^\"]*"`
+`dirname $0`/loadimage $IMGURL

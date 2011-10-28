@@ -1,0 +1,11 @@
+#!/bin/bash
+
+URL=$1
+feh $URL
+exit
+
+TMP=`mktemp`
+echo Downloading image from url $URL;
+wget -q -O $TMP $URL
+feh $TMP
+rm $TMP
