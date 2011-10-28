@@ -2,10 +2,15 @@
 
 URL=$1
 feh $URL
-exit
 
-TMP=`mktemp`
-echo Downloading image from url $URL;
-wget -q -O $TMP $URL
-feh $TMP
-rm $TMP
+#If feh fails for some reason, download manually (this sometimes helps)
+if [ $? != 0 ]; then
+  EXTENSION=`echo "$URL" | awk -F . '{print $NF}'`
+  TMP=`mktemp --suffix=.$EXTENSION`
+
+  echo Downloading image from url $URL;
+  wget -q -O $TMP $URL;
+
+  feh $TMP
+  rm $TMP
+fi

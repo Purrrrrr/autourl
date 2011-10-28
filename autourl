@@ -1,12 +1,17 @@
 #!/bin/bash
 URL=$1
 
-if expr $URL : '^http://imgur.com' > /dev/null ; then
-  `dirname $0`/loadimgur $URL
+#apina.biz has some strange urls
+if expr $URL : '^http://apina.biz' > /dev/null ; then
+  `dirname $0`/loadapina.biz $URL
   exit
 fi
 if expr $URL : '.*\(.png\|.jpg\|.gif\)$' > /dev/null ; then
   `dirname $0`/loadimage $URL
+  exit
+fi
+if expr $URL : '^http://imgur.com' > /dev/null ; then
+  `dirname $0`/loadimgur $URL
   exit
 fi
 

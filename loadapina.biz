@@ -1,0 +1,14 @@
+#!/bin/bash
+
+URL=$1
+COOKIEFILE="`dirname $0`/apina.cookies"
+echo "Downloading apina.biz data";
+if expr "$URL" : '.*\(.png\|.jpg\|.gif\)$' > /dev/null ; then
+  IMGURL=`wget -q --load-cookies "$COOKIEFILE" -O - $URL | grep img | egrep -o "http:\/\/term[^\"]*"`
+  wget -q --load-cookies "$COOKIEFILE" -O - $URL | grep img 
+else
+  IMGURL=`wget -q --load-cookies "$COOKIEFILE" -O - $URL | awk '/<div id="big_image">/,/<\/div>/' | egrep -o "src=\".*\"" | egrep -o "http[^\"]*"`
+fi
+
+echo $IMGURL
+`dirname $0`/loadimage $IMGURL
