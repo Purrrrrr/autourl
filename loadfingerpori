@@ -1,0 +1,7 @@
+#!/bin/bash
+
+URL=$1
+echo "Interpreting hs.fi/fingerpori url";
+echo $URL | sed "s/www.hs.fi\/fingerpori/www.hs.fi\/kuvat\/iso_webkuva/"
+IMGURL=`echo $URL | sed "s/www.hs.fi\/fingerpori/www.hs.fi\/kuvat\/iso_webkuva/"`
+`dirname $0`/loadimage $IMGURL

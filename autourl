@@ -14,5 +14,9 @@ if expr $URL : '^http://imgur.com' > /dev/null ; then
   `dirname $0`/loadimgur $URL
   exit
 fi
+if expr $URL : '^http://www.hs.fi/fingerpori/' > /dev/null ; then
+  `dirname $0`/loadfingerpori $URL
+  exit
+fi
 
 firefox $URL
