@@ -11,3 +11,9 @@ defaulting for a browser only in the case of non-image sites.
 
 This script can be used to replace your default browser helping keep the browser
 cache clean and your work less interrupted.
+
+Currently supports the following link types:
+* hs.fi/fingerpori
+* apina.biz
+* imgur.com
+* any URL ending in one of the suffixes .gif, .jpg or .png
