@@ -1,0 +1,13 @@
+Code more, browse imgur less!
+
+Situation: You want to lead a productive life and get something done
+Problem: Your friends post numerous fun links to imgur that ultimately 
+         lead you to just browse the internet instead of working
+Solution: autourl!
+
+Autourl is a small, but growing collection of scripts designed for opening URLs.
+The scripts detect image URLs and open them in a image viewer instead of a browser
+defaulting for a browser only in the case of non-image sites.
+
+This script can be used to replace your default browser helping keep the browser
+cache clean and your work less interrupted.
