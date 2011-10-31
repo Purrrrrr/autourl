@@ -2,6 +2,11 @@
 
 URL=$1
 EXTENSION=`echo "$URL" | awk -F . '{print $NF}'`
+PROTOCOL=`expr $URL : "\([^:]*\)://"`
+
+if expr "$PROTOCOL" != http \| "$PROTOCOL" != ftp; then
+  URL="http://$URL"
+fi
 
 if expr $EXTENSION != 'gif' > /dev/null ; then
   feh $URL
@@ -17,8 +22,9 @@ echo Downloading image from url $URL;
 
 wget -q -O $TMP $URL;
 FRAMECOUNT=`identify $TMP | grep GIF | wc -l`
+identify $TMP | grep GIF | wc -l
 
-if [ $FRAMECOUNT > 1 ]; then
+if [ $FRAMECOUNT -gt 1 ]; then
   eog $TMP
 else
   feh $TMP
