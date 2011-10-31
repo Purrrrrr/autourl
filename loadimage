@@ -1,16 +1,26 @@
 #!/bin/bash
 
 URL=$1
-feh $URL
+EXTENSION=`echo "$URL" | awk -F . '{print $NF}'`
 
-#If feh fails for some reason, download manually (this sometimes helps)
-if [ $? != 0 ]; then
-  EXTENSION=`echo "$URL" | awk -F . '{print $NF}'`
-  TMP=`mktemp --suffix=.$EXTENSION`
-
-  echo Downloading image from url $URL;
-  wget -q -O $TMP $URL;
-
-  feh $TMP
-  rm $TMP
+if expr $EXTENSION != 'gif' > /dev/null ; then
+  feh $URL
+  if [ $? == 0 ]; then 
+    exit
+  fi
 fi
+
+#If feh fails or we have a possibly animated gif, download manually 
+TMP=`mktemp --suffix=.$EXTENSION`
+
+echo Downloading image from url $URL;
+
+wget -q -O $TMP $URL;
+FRAMECOUNT=`identify $TMP | grep GIF | wc -l`
+
+if [ $FRAMECOUNT > 1 ]; then
+  eog $TMP
+else
+  feh $TMP
+fi
+rm $TMP
