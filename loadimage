@@ -4,7 +4,7 @@ URL=$1
 EXTENSION=`echo "$URL" | awk -F . '{print $NF}'`
 PROTOCOL=`expr $URL : "\([^:]*\)://"`
 
-if expr "$PROTOCOL" != http \| "$PROTOCOL" != ftp; then
+if expr "$PROTOCOL" != http \& "$PROTOCOL" != ftp; then
   URL="http://$URL"
 fi
 
